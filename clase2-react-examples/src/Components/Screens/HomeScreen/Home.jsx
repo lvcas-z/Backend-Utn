@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import Title from '../../Title/Title'
 import Products from '../../Products/Products'
 import { ProductContext } from '../../Context/ProductContext'
+import { Link } from 'react-router'
 
 const HomeScreen = () => {
 
@@ -12,6 +13,9 @@ const HomeScreen = () => {
             <Title>
                 Hola <span style={{ color: "blue" }}>Mundo</span>
             </Title>
+            <Link to={'/create'}>
+                Crear Producto
+            </Link>
             <Products products={products}/>
         </>
     )

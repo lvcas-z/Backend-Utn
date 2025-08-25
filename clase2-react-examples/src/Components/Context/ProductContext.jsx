@@ -1,35 +1,27 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
+import { getProducts } from "../../services/productService";
 
 export const ProductContext = createContext();
 
 const ProductContextProvider = ({ children }) => {
+    const productsData = getProducts()
+    const [products, setProducts] = useState(productsData)
 
-    const products = [
-        {
-            title: 'Tv samsung 32"',
-            id: 1,
-            price: 200,
-            descripcion: 'Tv muy buena',
-            stock: 3
-        },
-        {
-            title: 'Tv samsung 42"',
-            id: 2,
-            price: 300,
-            descripcion: 'Tv muy buena',
-            stock: 2
-        },
-        {
-            title: 'Tv samsung 52"',
-            id: 3,
-            price: 400,
-            descripcion: 'Tv muy buena',
-            stock: 1
-        }
-    ]
+const addNewProduct = (product) => {
+        /* Recibimos los datos del producto y creamos el nuestro */
+        const new_product = {...product, id: products.length + 1}
+
+        /* Modificamos el estado de producto */
+        setProducts(
+            (prev_products) => {
+                return [...prev_products, new_product]
+            }
+        )
+    }
+
     return (
         <ProductContext.Provider
-            value={{ products }}
+            value={{ products ,addNewProduct }}
         >
             {children}
         </ProductContext.Provider>
