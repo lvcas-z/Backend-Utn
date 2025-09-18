@@ -1,0 +1,3 @@
+-Toda app de node.js tiene un archivo `package.json` que contiene la informacion
+-No lleva archivo de tipo index porque es solo para el navegador
+-`src` es el directorio con todo el codigo de su programa

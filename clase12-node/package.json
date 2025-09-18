@@ -1,0 +1,17 @@
+{
+  "name": "clase10-node",
+  "version": "1.0.0",
+  "main": "./src/main.js",
+  "scripts": {
+    "start": "node ./src/main.js",
+    "dev": "node --watch ./src/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lvcas-z",
+  "license": "ISC",
+  "type": "module",
+  "description": "prueba de app",
+  "dependencies": {
+    "mongoose": "^8.18.1"
+  }
+}

@@ -24,7 +24,7 @@ console.log(persona1);
 
 class Item{
     id:number = 0
-    nombre:string = ''
+    nombre:string
     precio:number = 0
     descripcion:string = ''
 
@@ -68,7 +68,7 @@ class ItemTienda extends Item{
 class Tienda extends ItemTienda{
   id:number
   nombre:string
-  cantidadDeDineroEnCuenta:number
+  cantidadDeDineroEnCuenta:number = 0
   items: ItemTienda[]
 
   constructor(
@@ -96,21 +96,45 @@ class Tienda extends ItemTienda{
       return null
     }
   }
-}
 
+  comprar(nuevoItem: Item, cantidad: number, ganancia: number): void {
+        const gastoDeCompra: number = cantidad * nuevoItem.precio;
+        if (gastoDeCompra > this.cantidadDeDineroEnCuenta) {
+            alert('la compra no se puede realizar')
+			return //Cortar la funcion en caso de fallo
+        }
+        this.agregarItem(nuevoItem, cantidad, ganancia)
+        this.cantidadDeDineroEnCuenta -= gastoDeCompra;
+    }
+
+agregarItem(nuevoItem: Item, cantidad: number, ganancia: number){
+		const itemEnTienda = new ItemTienda(
+            nuevoItem.id,
+            nuevoItem.nombre,
+            nuevoItem.precio,
+            nuevoItem.descripcion,
+            cantidad,
+            ganancia
+        );
+        this.items.push(itemEnTienda);
+	}
+
+
+}
 // mostrarItem :void (){
 //   console.log(`${this.nombre} es ${this.descripcion} y cuesta : $ ${this.precio}`);
 // }
-
 
 const item1 = new ItemTienda(1, "Televisor", 500, "TV LED 42 pulgadas", 10, 50);
 const item2 = new ItemTienda(2, "Celular", 300, "Smartphone 128GB", 20, 40);
 const tienda1 = new Tienda(10, "Electro Mundo", 10000, [item1, item2], 0, "", 0, 0);
 
-console.log("Buscando en tienda 1:", tienda1.buscarItemPorId(3));
+console.log("Buscando en tienda 1:", tienda1.buscarItemPorId(2));
 
 
-/* -comprar(nuevo_item: Item, cantidad: number, margen_gancia: number)
+/* -comprar(nuevoItem: Item, cantidad: number, margen_gancia: number)
             -Calcular el costo de la operacion y en caso de ser mayor a la cantidad de dinero en cuenta lanzar un error por consola diciendo, no se puede realizar la operacion, motivo: no hay dinero suficiente
             -Crear un ItemTienda a partir de Item
             -pushear a la lista de items */
+
+
