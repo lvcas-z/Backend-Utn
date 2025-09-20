@@ -4,23 +4,24 @@ import ChannelMessage from "./models/ChannelMessage.model.js";
 import MemberWorkspace from "./models/MemberWorkspace.model.js";
 import User from "./models/User.model.js";
 import Workspace from "./models/Workspace.model.js";
+import WorkspaceRepository from "./repositories/workspace.repository.js";
 connectToMongoDB()
 
 //crearUsuario("messi","messi@gmail.com","asdasdad")
 
-async function crearWorkspace(name,url_image) {
-    try {
-        await Workspace.insertOne({
-            name,
-            url_image
-        })
-        console.log("SERVER: Workspace creado");
+// async function crearWorkspace(name,url_image) {
+//     try {
+//         await Workspace.insertOne({
+//             name,
+//             url_image
+//         })
+//         console.log("SERVER: Workspace creado");
         
-    } catch (error) {
-        console.log("error",error);
-    }
+//     } catch (error) {
+//         console.log("error",error);
+//     }
     
-}
+// }
 
 async function crearMiembroWorkspace (user_id, workspace_id, role){
     try{
@@ -68,4 +69,9 @@ async function crearMensajeCanal(id_channel, id_sender, message){
     }
 }
 
-crearMensajeCanal("68cb80dc7d96e4051aa9b5c3","68caca03b57c9e135c7ec91c","Hola soy un mensaje del worskpace member y mi nombre es messi segun mi id jajajsjajs")
+// WorkspaceRepository.create("Workspace 4","empty")
+
+// WorkspaceRepository.updateById("68cb80dd03c7fa9d554ca9d5",{
+//     name:"Workspace updateado",
+//     url_image:"empty"
+// })
