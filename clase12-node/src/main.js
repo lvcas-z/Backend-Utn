@@ -4,6 +4,7 @@ import ChannelMessage from "./models/ChannelMessage.model.js";
 import MemberWorkspace from "./models/MemberWorkspace.model.js";
 import User from "./models/User.model.js";
 import Workspace from "./models/Workspace.model.js";
+import MemberWorkspaceRepository from "./repositories/memberworkspace.repository.js";
 import WorkspaceRepository from "./repositories/workspace.repository.js";
 connectToMongoDB()
 
@@ -75,3 +76,6 @@ async function crearMensajeCanal(id_channel, id_sender, message){
 //     name:"Workspace updateado",
 //     url_image:"empty"
 // })
+
+// MemberWorkspaceRepository.getById("68cc1e5e6bade807c17ad264")
+// MemberWorkspaceRepository.deleteById("68cc1f4a9b3f9082268d6229")
