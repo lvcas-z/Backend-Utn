@@ -12,6 +12,7 @@
   "type": "module",
   "description": "prueba de app",
   "dependencies": {
+    "express": "^5.1.0",
     "mongoose": "^8.18.1"
   }
 }
