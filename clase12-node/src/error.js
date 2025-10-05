@@ -40,6 +40,9 @@ const manejarError = (accionCallback) =>{
     }
 }
 
-manejarError(() =>{ sumar(2) })
-
-manejarError(() =>{ sakldhsudosadoas })
+export class ServerError extends Error{
+    constructor(status, message){
+        super(message)
+        this.status = status
+    }
+}
