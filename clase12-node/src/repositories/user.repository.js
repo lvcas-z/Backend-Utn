@@ -4,7 +4,7 @@ class UserRepository {
 
     static async create(name, email, password) {
         try {
-            await User.insertOne({
+            return await User.insertOne({
                 name: name,
                 email: email,
                 password: password

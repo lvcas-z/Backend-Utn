@@ -42,10 +42,12 @@ class AuthController {
 
     static async verifyEmail(request,response){
         try {
-            const {email} = request.params
-            console.log("Mail a verificar",email);
+            const {verification_token} = request.params
+            await Authservice.verifyEmail(verification_token)
             response.json({
-                ok:true
+                ok:true,
+                message:"usuario verificado exitosamente",
+                status:200
             })
 
         } catch (error) {
