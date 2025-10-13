@@ -10,7 +10,8 @@ const ENVIROMENT = {
     MONGO_DB_HOST: process.env.MONGO_DB_HOST,
     MONGO_DB_NAME: process.env.MONGO_DB_NAME,
     JWT_TOKEN:process.env.JWT_TOKEN,
-    URL_FRONTEND:process.env.URL_FRONTEND
+    URL_FRONTEND:process.env.URL_FRONTEND,
+    JWT_SECRET: process.env.JWT_SECRET
 }
 
 

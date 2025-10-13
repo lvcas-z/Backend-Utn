@@ -23,7 +23,9 @@ export async function register(username, email, password) {
         )
         //Transformamos el body de respuesta de JSON a objeto de JS 
         const response = await responseHttps.json()
-
+        
+        console.log(response);
+        
         return response
     }
     catch (error) {

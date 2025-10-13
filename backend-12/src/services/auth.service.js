@@ -23,7 +23,7 @@ class Authservice {
         const vericationToken = jwt.sign({
             userId: userIdCreated
         },
-            ENVIROMENT.JWT_TOKEN
+            ENVIROMENT.JWT_SECRET
         )
 
         await mailTransporter.sendMail({
@@ -41,8 +41,9 @@ class Authservice {
     static async verifyEmail (verification_token){
         try{
             //Nos dice si el token esta firmado con x clave
-            const payload = jwt.verify(verification_token, ENVIROMENT.JWT_TOKEN )
+            const payload = jwt.verify(verification_token, ENVIROMENT.JWT_SECRET )
             const {userId} = payload
+            
             if(!userId){
                 throw new ServerError(400, 'Accion denegada, token con datos insuficientes')
             } 
