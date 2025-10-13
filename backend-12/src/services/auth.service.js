@@ -21,7 +21,7 @@ class Authservice {
 
         //.sing() firmar un token
         const vericationToken = jwt.sign({
-            user_id: userIdCreated
+            userId: userIdCreated
         },
             ENVIROMENT.JWT_TOKEN
         )
@@ -42,11 +42,19 @@ class Authservice {
         try{
             //Nos dice si el token esta firmado con x clave
             const payload = jwt.verify(verification_token, ENVIROMENT.JWT_TOKEN )
-            const {user_id} = payload
-            if(!user_id){
+            const {userId} = payload
+            if(!userId){
                 throw new ServerError(400, 'Accion denegada, token con datos insuficientes')
             } 
-            await UserRepository.updateById(user_id, {verified_email: true})
+            const userFound = await UserRepository.getById(userId)
+            if (!userFound) {
+                throw new ServerError(404,'Usuario no encontrado');
+            }
+            if (userFound.verified_email) {
+                throw new ServerError(400,'Usuario ya validado');
+            }
+
+            await UserRepository.updateById(userId, {verified_email: true})
             return 
         }
         catch(error){
@@ -57,5 +65,46 @@ class Authservice {
             throw error
         }
     }
+
+    static async login (email, password){
+        /* 
+        -Buscar al usuario por email
+        -Validar que exista
+        -Validar que este verificado su mail
+        -Comparar la password recibida con la del usuario
+        -Genera un token con datos de sesion del usuario y responderlo
+        */
+
+        const userFound = await UserRepository.getByEmail(email)
+        
+        if(!userFound) {
+            throw new ServerError(404, 'Usuario con este mail no encontrado')
+        }
+        
+        if(!userFound.verified_email){
+            throw new ServerError(401, 'Usuario con mail no verificado')
+        }
+
+        const isSamePassword = await bcrypt.compare( password, userFound.password )
+
+        if(!isSamePassword){
+            throw new ServerError(401, 'Contraseña invalida')
+        }
+
+        //creo un token con datos de sesion (DATOS NO SENSIBLES)
+        const authToken = jwt.sign(
+            {
+                name: userFound.name,
+                email: userFound.email,
+                id: userFound.id,
+            },
+            ENVIRONMENT.JWT_SECRET
+        )
+
+        return {
+            authToken: authToken
+        }
+    }
+
 }
 export default Authservice

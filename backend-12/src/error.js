@@ -1,4 +1,3 @@
-import { sumar } from "./math.js";
 export class CustomError extends Error{
     constructor(message, status){
         super(message)

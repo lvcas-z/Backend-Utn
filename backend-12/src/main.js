@@ -3,12 +3,15 @@ import connectToMongoDB from "./config/configMongoDB.config.js";
 import express, { request, response } from 'express'
 import authRouter from './routes/auth.router.js'
 import workspaceRouter from "./routes/workspace.router.js";
-
+import cors from "cors"
 connectToMongoDB()
 
 //Crea una app de express (servidor web)
 const app = express()
 
+//Configuro mi api como publica, cualquier dominio puede hacer peticiones
+
+app.use(cors())
 
 ///Configuramos un middleware que permite que el json que envien en el body de la consulta se transforme en objeto de js
 app.use(express.json())

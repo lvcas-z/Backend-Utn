@@ -6,7 +6,7 @@ const authRouter= Router()
 
 authRouter.post('/register', AuthController.register)
 authRouter.get('/verify-email/:verification_token',AuthController.verifyEmail)
-
+authRouter.post('/login', AuthController.login)
 // authRouter.post("/")
 
 export default authRouter
