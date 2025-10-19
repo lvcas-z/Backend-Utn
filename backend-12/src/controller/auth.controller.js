@@ -25,7 +25,7 @@ class AuthController {
         }
         catch (error) {
             if (error.status) {
-                response.send({
+                response.status(error.status).send({
                     ok: false,
                     message: error.message,
                     status: error.status
@@ -73,7 +73,7 @@ class AuthController {
 
             const { authToken } = await Authservice.login(email, password)
 
-            response.json(
+            response.status(200).json(
                 {
                     ok: true, 
                     message: 'Usuario logueado con exito',

@@ -4,6 +4,7 @@ import { ServerError } from "../error.js";
 import UserRepository from "../repositories/user.repository.js";
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
+
 class Authservice {
     static async register(email, password, name) {
         const user = await UserRepository.getByEmail(email)
@@ -99,7 +100,7 @@ class Authservice {
                 email: userFound.email,
                 id: userFound.id,
             },
-            ENVIRONMENT.JWT_SECRET
+            ENVIROMENT.JWT_SECRET
         )
 
         return {
