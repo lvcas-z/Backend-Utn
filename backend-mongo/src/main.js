@@ -24,6 +24,6 @@ app.use("/api/workspace",workspaceRouter)
 
 //Listen lo usamos para dedicar un puerto a nuestro server
 //2 parametro - 1 nro de puerto - 2 callback que ejecuta si sale todo bien
-// app.listen(ENVIROMENT.PORT || 8080,()=>{
-//     console.log(`Server Ok`);  
-// })
+app.listen(ENVIROMENT.PORT || 8080,()=>{
+    console.log(`Server Ok`);  
+})
